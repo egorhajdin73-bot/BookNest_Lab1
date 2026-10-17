@@ -5,185 +5,109 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>BookNest — каталог книг</title>
   <meta name="description" content="Каталог книг университетского книжного клуба BookNest.">
+  
+  <!-- Стили из ЛР2 -->
+  <link rel="stylesheet" href="styles/tokens.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/components.css">
 </head>
 <body>
   <a href="#main-content">Перейти к содержимому</a>
 
-  <header>
+  <header class="site-header">
     <p><a href="index.html" aria-label="BookNest — на главную">BookNest</a></p>
     <nav aria-label="Основная навигация">
-      <ul>
+      <ul class="nav-list">
         <li><a href="index.html" aria-current="page">Каталог</a></li>
         <li><a href="book.html">О книге</a></li>
         <li><a href="loan.html">Получить книгу</a></li>
+        <!-- Счетчик избранного -->
+        <li><a href="#" style="font-weight: bold; color: var(--color-primary);">Мой список (<span id="wishlist-count">0</span>)</a></li>
       </ul>
     </nav>
   </header>
 
-  <main id="main-content">
+  <main id="main-content" class="main-content container">
     <h1>Каталог книг</h1>
     <p>Находите следующую книгу для чтения вместе с университетским книжным клубом.</p>
 
-    <section aria-labelledby="filters-heading">
-      <h2 id="filters-heading">Поиск и фильтры</h2>
-      <form action="index.html" method="get">
-        <p>
-          <label for="search">Поиск по названию или автору</label>
-          <input type="search" id="search" name="q" placeholder="Например, Джейн Остин" maxlength="100">
-        </p>
-        <p>
-          <label for="genre">Жанр</label>
-          <select id="genre" name="genre">
-            <option value="">Все жанры</option>
-            <option value="classic">Классика</option>
-            <option value="fantasy">Фэнтези</option>
-            <option value="science-fiction">Научная фантастика</option>
-            <option value="non-fiction">Нон-фикшн</option>
-            <option value="mystery">Детектив</option>
-          </select>
-        </p>
-        <p>
-          <label for="sort">Сортировка</label>
-          <select id="sort" name="sort">
-            <option value="title-asc">По названию: от А до Я</option>
-            <option value="title-desc">По названию: от Я до А</option>
-            <option value="year-desc">Сначала новые</option>
-            <option value="year-asc">Сначала старые</option>
-          </select>
-        </p>
-        <p>
-          <input type="checkbox" id="available" name="available" value="yes">
-          <label for="available">Только доступные</label>
-        </p>
-        <button type="submit">Применить фильтры</button>
-        <button type="reset">Сбросить</button>
-      </form>
-    </section>
+    <div class="main-layout">
+      <!-- Фильтры -->
+      <aside>
+        <section aria-labelledby="filters-heading">
+          <h2 id="filters-heading">Поиск и фильтры</h2>
+          <form action="index.html" method="get" id="filter-form">
+            <div class="form-field">
+              <label for="search">Поиск по названию или автору</label>
+              <input type="search" id="search" name="q" class="form-input" placeholder="Например, Гарри Поттер" maxlength="100">
+            </div>
+            <!-- Остальные фильтры оставим для визуала, хотя Open Library API фильтрует в основном по поисковому запросу -->
+            <div class="form-field">
+              <label for="genre">Жанр</label>
+              <select id="genre" name="genre" class="form-select">
+                <option value="">Все жанры</option>
+                <option value="classic">Классика</option>
+                <option value="fantasy">Фэнтези</option>
+                <option value="sci-fi">Научная фантастика</option>
+                <option value="non-fiction">Нон-фикшн</option>
+                <option value="mystery">Детектив</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="sort">Сортировка</label>
+              <select id="sort" name="sort" class="form-select">
+                <option value="title-asc">По названию: от А до Я</option>
+                <option value="title-desc">По названию: от Я до А</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <input type="checkbox" id="available" name="available" value="yes">
+              <label for="available">Только доступные</label>
+            </div>
+            <button type="submit" class="btn">Применить</button>
+            <button type="reset" class="btn btn--secondary">Сбросить</button>
+          </form>
+        </section>
+      </aside>
 
-    <section aria-labelledby="books-heading">
-      <h2 id="books-heading">Книги в каталоге</h2>
-      <p>Всего в подборке — 6 книг.</p>
+      <!-- Каталог книг -->
+      <section aria-labelledby="books-heading">
+        <h2 id="books-heading">Книги в каталоге</h2>
+        
+        <!-- 1. Состояние загрузки -->
+        <div id="loader" class="state-box hidden">
+          <p>Загрузка данных...</p>
+        </div>
 
-      <article>
-        <figure>
-          <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&amp;fit=crop&amp;w=240&amp;h=340&amp;q=80" alt="Обложка книги «Гордость и предубеждение»" width="240" height="340">
-          <figcaption>Классическая литература</figcaption>
-        </figure>
-        <h3><a href="book.html">Гордость и предубеждение</a></h3>
-        <dl>
-          <dt>Автор</dt>
-          <dd>Джейн Остин</dd>
-          <dt>Год издания</dt>
-          <dd><time datetime="1813">1813</time></dd>
-          <dt>Доступно</dt>
-          <dd>3 экземпляра</dd>
-        </dl>
-        <p>Роман о семье, общественных ожиданиях и том, как первое впечатление может оказаться ошибочным.</p>
-        <p><a href="book.html">Подробнее о книге</a> · <a href="loan.html">Оформить выдачу</a></p>
-      </article>
+        <!-- 2. Состояние ошибки -->
+        <div id="error-box" class="state-box hidden">
+          <p id="error-msg" style="color: red; font-weight: bold;"></p>
+          <button id="retry-btn" class="btn">Повторить</button>
+        </div>
 
-      <article>
-        <figure>
-          <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&amp;fit=crop&amp;w=240&amp;h=340&amp;q=80" alt="Обложка книги «Маленький принц»" width="240" height="340">
-          <figcaption>Философская сказка</figcaption>
-        </figure>
-        <h3><a href="book.html">Маленький принц</a></h3>
-        <dl>
-          <dt>Автор</dt>
-          <dd>Антуан де Сент-Экзюпери</dd>
-          <dt>Год издания</dt>
-          <dd><time datetime="1943">1943</time></dd>
-          <dt>Доступно</dt>
-          <dd>2 экземпляра</dd>
-        </dl>
-        <p>История путешествия, дружбы и ответственности, рассказанная через встречу пилота с необычным мальчиком.</p>
-        <p><a href="book.html">Подробнее о книге</a> · <a href="loan.html">Оформить выдачу</a></p>
-      </article>
+        <!-- 3. Пустой результат -->
+        <div id="empty-box" class="state-box hidden">
+          <p>По вашему запросу ничего не найдено. Попробуйте изменить запрос.</p>
+        </div>
 
-      <article>
-        <figure>
-          <img src="https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&amp;fit=crop&amp;w=240&amp;h=340&amp;q=80" alt="Обложка книги «1984»" width="240" height="340">
-          <figcaption>Антиутопия</figcaption>
-        </figure>
-        <h3><a href="book.html">1984</a></h3>
-        <dl>
-          <dt>Автор</dt>
-          <dd>Джордж Оруэлл</dd>
-          <dt>Год издания</dt>
-          <dd><time datetime="1949">1949</time></dd>
-          <dt>Доступно</dt>
-          <dd>0 экземпляров</dd>
-        </dl>
-        <p>Антиутопический роман о тотальном контроле, языке и личной свободе.</p>
-        <p><a href="book.html">Подробнее о книге</a> · <a href="loan.html">Оформить выдачу</a></p>
-      </article>
-
-      <article>
-        <figure>
-          <img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&amp;fit=crop&amp;w=240&amp;h=340&amp;q=80" alt="Обложка книги «Хоббит»" width="240" height="340">
-          <figcaption>Фэнтези</figcaption>
-        </figure>
-        <h3><a href="book.html">Хоббит, или Туда и обратно</a></h3>
-        <dl>
-          <dt>Автор</dt>
-          <dd>Джон Рональд Руэл Толкин</dd>
-          <dt>Год издания</dt>
-          <dd><time datetime="1937">1937</time></dd>
-          <dt>Доступно</dt>
-          <dd>1 экземпляр</dd>
-        </dl>
-        <p>Бильбо Бэггинс отправляется в путешествие, которое меняет его привычную жизнь.</p>
-        <p><a href="book.html">Подробнее о книге</a> · <a href="loan.html">Оформить выдачу</a></p>
-      </article>
-
-      <article>
-        <figure>
-          <img src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&amp;fit=crop&amp;w=240&amp;h=340&amp;q=80" alt="Обложка книги «Убийство в Восточном экспрессе»" width="240" height="340">
-          <figcaption>Детектив</figcaption>
-        </figure>
-        <h3><a href="book.html">Убийство в Восточном экспрессе</a></h3>
-        <dl>
-          <dt>Автор</dt>
-          <dd>Агата Кристи</dd>
-          <dt>Год издания</dt>
-          <dd><time datetime="1934">1934</time></dd>
-          <dt>Доступно</dt>
-          <dd>4 экземпляра</dd>
-        </dl>
-        <p>Эркюль Пуаро расследует убийство, совершённое в поезде, отрезанном от внешнего мира снегом.</p>
-        <p><a href="book.html">Подробнее о книге</a> · <a href="loan.html">Оформить выдачу</a></p>
-      </article>
-
-      <article>
-        <figure>
-          <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&amp;fit=crop&amp;w=240&amp;h=340&amp;q=80" alt="Обложка книги «Краткая история времени»" width="240" height="340">
-          <figcaption>Научно-популярная литература</figcaption>
-        </figure>
-        <h3><a href="book.html">Краткая история времени</a></h3>
-        <dl>
-          <dt>Автор</dt>
-          <dd>Стивен Хокинг</dd>
-          <dt>Год издания</dt>
-          <dd><time datetime="1988">1988</time></dd>
-          <dt>Доступно</dt>
-          <dd>2 экземпляра</dd>
-        </dl>
-        <p>Введение в вопросы происхождения Вселенной, чёрных дыр и природы времени.</p>
-        <p><a href="book.html">Подробнее о книге</a> · <a href="loan.html">Оформить выдачу</a></p>
-      </article>
-    </section>
-
-    <aside aria-labelledby="club-heading">
-      <h2 id="club-heading">О книжном клубе</h2>
-      <p>BookNest объединяет студентов, которые хотят открывать новые книги, делиться впечатлениями и обсуждать прочитанное.</p>
-      <p><a href="loan.html">Выбрать книгу для чтения</a></p>
-    </aside>
+        <!-- 4. Успех (Контейнер для книг) -->
+        <div class="book-grid hidden" id="book-grid"></div>
+        
+        <!-- Пагинация -->
+        <div id="pagination" class="pagination hidden">
+          <button id="prev-btn" class="btn btn--secondary">Назад</button>
+          <span id="page-info">Страница 1</span>
+          <button id="next-btn" class="btn btn--secondary">Вперед</button>
+        </div>
+      </section>
+    </div>
   </main>
 
-  <footer>
+  <footer class="site-footer">
     <p>BookNest — университетский книжный клуб.</p>
     <nav aria-label="Дополнительная навигация">
-      <ul>
+      <ul class="nav-list">
         <li><a href="index.html">Каталог</a></li>
         <li><a href="book.html">Карточка книги</a></li>
         <li><a href="loan.html">Форма выдачи</a></li>
@@ -191,5 +115,8 @@
     </nav>
     <p><small>Учебный проект. <time datetime="2026">2026</time></small></p>
   </footer>
+
+  <!-- Подключение JavaScript (ЛР4) -->
+  <script type="module" src="main.js"></script>
 </body>
 </html>

@@ -1,0 +1,16 @@
+{
+  "clientName": "Thunder Client",
+  "collectionName": "BookNest Open Library",
+  "requests": [
+    {
+      "name": "Search Books",
+      "method": "GET",
+      "url": "https://openlibrary.org/search.json?q=harry+potter&limit=20"
+    },
+    {
+      "name": "Get Book Detail",
+      "method": "GET",
+      "url": "https://openlibrary.org/works/OL82563W.json"
+    }
+  ]
+}
