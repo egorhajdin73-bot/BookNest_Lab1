@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Гордость и предубеждение — BookNest</title>
+  <meta name="description" content="Описание книги «Гордость и предубеждение», характеристики и отзывы читателей BookNest.">
+</head>
+<body>
+  <a href="#main-content">Перейти к содержимому</a>
+
+  <header>
+    <p><a href="index.html" aria-label="BookNest — на главную">BookNest</a></p>
+    <nav aria-label="Основная навигация">
+      <ul>
+        <li><a href="index.html">Каталог</a></li>
+        <li><a href="book.html" aria-current="page">О книге</a></li>
+        <li><a href="loan.html">Получить книгу</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <nav aria-label="Хлебные крошки">
+      <ol>
+        <li><a href="index.html">Каталог</a></li>
+        <li aria-current="page">Гордость и предубеждение</li>
+      </ol>
+    </nav>
+
+    <article>
+      <header>
+        <h1>Гордость и предубеждение</h1>
+        <p>Роман Джейн Остин о любви, достоинстве и первых впечатлениях.</p>
+      </header>
+
+      <figure>
+        <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&amp;fit=crop&amp;w=360&amp;h=510&amp;q=80" alt="Книга в мягкой обложке — иллюстрация издания романа «Гордость и предубеждение»" width="360" height="510">
+        <figcaption>Иллюстративное изображение книги.</figcaption>
+      </figure>
+
+      <section aria-labelledby="details-heading">
+        <h2 id="details-heading">Характеристики</h2>
+        <dl>
+          <dt>Автор</dt>
+          <dd>Джейн Остин</dd>
+          <dt>Жанр</dt>
+          <dd>Классическая литература, роман</dd>
+          <dt>Год первой публикации</dt>
+          <dd><time datetime="1813">1813</time></dd>
+          <dt>Язык</dt>
+          <dd>Английский; в каталоге представлено русскоязычное издание</dd>
+          <dt>Наличие</dt>
+          <dd>3 экземпляра доступны для выдачи</dd>
+          <dt>Срок выдачи</dt>
+          <dd>14 дней</dd>
+        </dl>
+      </section>
+
+      <section aria-labelledby="description-heading">
+        <h2 id="description-heading">Описание</h2>
+        <p>В центре романа — Элизабет Беннет и мистер Дарси. Их знакомство начинается с взаимного недоверия, но постепенно герои учатся смотреть глубже первых впечатлений и общественных предрассудков.</p>
+        <p>Книга сочетает тонкий юмор, наблюдения за обществом и историю личного взросления. Она подойдёт читателям, которым интересны классические романы о характере, семье и выборе.</p>
+      </section>
+
+      <section aria-labelledby="reviews-heading">
+        <h2 id="reviews-heading">Отзывы читателей</h2>
+        <article>
+          <h3>Алия</h3>
+          <p>Оценка: 5 из 5</p>
+          <p>«Диалоги остроумные, а герои раскрываются постепенно. После чтения хочется обсудить книгу с другими».</p>
+          <p><time datetime="2026-05-12">12 мая 2026 года</time></p>
+        </article>
+        <article>
+          <h3>Данияр</h3>
+          <p>Оценка: 4 из 5</p>
+          <p>«Поначалу язык кажется непривычным, но отношения персонажей делают историю интересной».</p>
+          <p><time datetime="2026-05-20">20 мая 2026 года</time></p>
+        </article>
+      </section>
+
+      <section aria-labelledby="new-review-heading">
+        <h2 id="new-review-heading">Оставить отзыв</h2>
+        <form action="#" method="post">
+          <fieldset>
+            <legend>Ваш отзыв о книге</legend>
+            <p>
+              <label for="review-name">Имя</label>
+              <input type="text" id="review-name" name="review-name" autocomplete="name" required minlength="2" maxlength="60">
+            </p>
+            <p>
+              <label for="review-email">Электронная почта</label>
+              <input type="email" id="review-email" name="review-email" autocomplete="email" required maxlength="254">
+            </p>
+            <p>
+              <label for="review-rating">Оценка</label>
+              <select id="review-rating" name="review-rating" required>
+                <option value="">Выберите оценку</option>
+                <option value="5">5 — отлично</option>
+                <option value="4">4 — хорошо</option>
+                <option value="3">3 — нормально</option>
+                <option value="2">2 — плохо</option>
+                <option value="1">1 — очень плохо</option>
+              </select>
+            </p>
+            <p>
+              <label for="review-text">Текст отзыва</label>
+              <textarea id="review-text" name="review-text" rows="5" required minlength="10" maxlength="1000"></textarea>
+            </p>
+            <button type="submit">Отправить отзыв</button>
+          </fieldset>
+        </form>
+      </section>
+    </article>
+
+    <aside aria-labelledby="similar-heading">
+      <h2 id="similar-heading">Похожие книги</h2>
+      <ul>
+        <li><a href="index.html">«Маленький принц» — Антуан де Сент-Экзюпери</a></li>
+        <li><a href="index.html">«Хоббит, или Туда и обратно» — Джон Р. Р. Толкин</a></li>
+        <li><a href="index.html">«Убийство в Восточном экспрессе» — Агата Кристи</a></li>
+      </ul>
+      <p><a href="loan.html">Оформить выдачу этой книги</a></p>
+    </aside>
+  </main>
+
+  <footer>
+    <p>BookNest — университетский книжный клуб.</p>
+    <nav aria-label="Дополнительная навигация">
+      <ul>
+        <li><a href="index.html">Каталог</a></li>
+        <li><a href="book.html">Карточка книги</a></li>
+        <li><a href="loan.html">Форма выдачи</a></li>
+      </ul>
+    </nav>
+  </footer>
+</body>
+</html>

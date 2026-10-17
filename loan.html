@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Форма выдачи книги — BookNest</title>
+  <meta name="description" content="Учебная форма оформления выдачи книги в книжном клубе BookNest.">
+</head>
+<body>
+  <a href="#main-content">Перейти к содержимому</a>
+
+  <header>
+    <p><a href="index.html" aria-label="BookNest — на главную">BookNest</a></p>
+    <nav aria-label="Основная навигация">
+      <ul>
+        <li><a href="index.html">Каталог</a></li>
+        <li><a href="book.html">О книге</a></li>
+        <li><a href="loan.html" aria-current="page">Получить книгу</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <nav aria-label="Хлебные крошки">
+      <ol>
+        <li><a href="index.html">Каталог</a></li>
+        <li><a href="book.html">Гордость и предубеждение</a></li>
+        <li aria-current="page">Форма выдачи</li>
+      </ol>
+    </nav>
+
+    <h1>Оформление выдачи книги</h1>
+    <p>Заполните форму, чтобы отправить запрос на выдачу экземпляра. В учебной версии данные не сохраняются на сервере.</p>
+
+    <form action="#" method="post">
+      <fieldset>
+        <legend>Данные читателя</legend>
+        <p>
+          <label for="reader-name">Имя и фамилия</label>
+          <input type="text" id="reader-name" name="reader-name" autocomplete="name" required minlength="2" maxlength="100" pattern="[А-Яа-яЁёA-Za-z -]{2,100}">
+        </p>
+        <p>
+          <label for="reader-email">Университетская электронная почта</label>
+          <input type="email" id="reader-email" name="reader-email" autocomplete="email" required maxlength="254">
+        </p>
+        <p>
+          <label for="student-id">Номер студенческого билета</label>
+          <input type="text" id="student-id" name="student-id" required minlength="4" maxlength="20" pattern="[A-Za-zА-Яа-яЁё0-9-]{4,20}" aria-describedby="student-id-help">
+          <small id="student-id-help">Введите от 4 до 20 букв, цифр или дефисов.</small>
+        </p>
+      </fieldset>
+
+      <fieldset>
+        <legend>Параметры выдачи</legend>
+        <p>
+          <label for="book-title">Книга</label>
+          <select id="book-title" name="book-title" required>
+            <option value="">Выберите книгу</option>
+            <option value="pride-and-prejudice">Гордость и предубеждение — Джейн Остин</option>
+            <option value="little-prince">Маленький принц — Антуан де Сент-Экзюпери</option>
+            <option value="1984">1984 — Джордж Оруэлл</option>
+            <option value="hobbit">Хоббит, или Туда и обратно — Дж. Р. Р. Толкин</option>
+            <option value="orient-express">Убийство в Восточном экспрессе — Агата Кристи</option>
+            <option value="brief-history-time">Краткая история времени — Стивен Хокинг</option>
+          </select>
+        </p>
+        <p>
+          <label for="loan-date">Желаемая дата получения</label>
+          <input type="date" id="loan-date" name="loan-date" required min="2026-01-01">
+        </p>
+        <p>
+          <label for="loan-days">Срок выдачи в днях</label>
+          <input type="number" id="loan-days" name="loan-days" required min="1" max="14" value="14">
+        </p>
+        <p>
+          <label for="copy-count">Количество экземпляров</label>
+          <input type="number" id="copy-count" name="copy-count" required min="1" max="1" value="1">
+        </p>
+      </fieldset>
+
+      <fieldset>
+        <legend>Дополнительная информация</legend>
+        <p>
+          <label for="pickup-method">Способ получения</label>
+          <select id="pickup-method" name="pickup-method" required>
+            <option value="">Выберите способ</option>
+            <option value="library-desk">На стойке библиотеки</option>
+            <option value="club-meeting">На встрече книжного клуба</option>
+          </select>
+        </p>
+        <p>
+          <label for="reader-comment">Комментарий библиотекарю</label>
+          <textarea id="reader-comment" name="reader-comment" rows="4" maxlength="500" placeholder="Необязательно"></textarea>
+        </p>
+        <p>
+          <input type="checkbox" id="rules-agreement" name="rules-agreement" value="accepted" required>
+          <label for="rules-agreement">Я согласен вернуть книгу в установленный срок.</label>
+        </p>
+      </fieldset>
+
+      <button type="submit">Отправить запрос</button>
+      <button type="reset">Очистить форму</button>
+    </form>
+
+    <aside aria-labelledby="loan-rules-heading">
+      <h2 id="loan-rules-heading">Правила выдачи</h2>
+      <ul>
+        <li>Стандартный срок выдачи — не более 14 дней.</li>
+        <li>Одновременно можно запросить один экземпляр этой книги.</li>
+        <li>Если свободных экземпляров нет, выдача невозможна.</li>
+        <li>После отправки формы обратитесь к библиотекарю для подтверждения.</li>
+      </ul>
+      <p><a href="book.html">Вернуться к карточке книги</a></p>
+    </aside>
+  </main>
+
+  <footer>
+    <p>BookNest — университетский книжный клуб.</p>
+    <nav aria-label="Дополнительная навигация">
+      <ul>
+        <li><a href="index.html">Каталог</a></li>
+        <li><a href="book.html">Карточка книги</a></li>
+        <li><a href="loan.html">Форма выдачи</a></li>
+      </ul>
+    </nav>
+  </footer>
+</body>
+</html>
